@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import './App.css';
+import Header from './components/Header';
+import Home from './components/Home';
+import RaisingFunds from './components/RaisingFunds';
+import SignIn from './components/SignIn';
 
-function App() {
+const App = () => {
+  const [user, setUser] = useState(null);
+
+  // Check if the user is already logged in (using localStorage)
+  useEffect(() => {
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    setUser(null);
+    localStorage.removeItem('user');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header user={user} onLogout={handleLogout} />
+      <Routes>
+        <Route path="/" element={<Home user={user} />} />
+        <Route path="/raising-funds" element={user ? <RaisingFunds /> : <Navigate to="/sign-in" />} />
+        <Route path="/sign-in" element={<SignIn setUser={setUser} />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
