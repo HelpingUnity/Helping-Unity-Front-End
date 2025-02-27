@@ -8,8 +8,6 @@ import {
   CircularProgress,
   ListItemButton,
   Box,
-  Paper,
-  Grow,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -34,121 +32,82 @@ const DonationRequestList = () => {
   }, []);
 
   if (loading)
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-        <CircularProgress size={60} thickness={4} color="secondary" />
-      </Box>
-    );
+    return <CircularProgress sx={{ display: 'block', margin: 'auto', marginTop: 4 }} />;
 
   return (
-    <Container maxWidth="md" sx={{ mt: 5, p: 3, fontFamily: "'Poppins', sans-serif" }}>
-      <Grow in timeout={800}>
-        <Paper
-          elevation={8}
-          sx={{
-            p: 4,
-            borderRadius: 4,
-            textAlign: 'center',
-            backdropFilter: 'blur(10px)',
-            backgroundColor: 'rgba(255, 255, 255, 0.85)',
-            boxShadow: '0px 6px 25px rgba(0, 0, 0, 0.12)',
-            transition: 'all 0.4s ease-in-out',
-            '&:hover': {
-              boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.2)',
-              transform: 'scale(1.02)',
-            },
-          }}
-        >
-          <Typography
-            variant="h4"
-            gutterBottom
-            sx={{
-              fontWeight: 'bold',
-              color: 'primary.main',
-              mb: 3,
-              letterSpacing: '1px',
-              textTransform: 'uppercase',
-              fontFamily: "'Roboto Slab', serif",
-            }}
-          >
-            Start Funding
-          </Typography>
+    <Container sx={{ 
+      mt: 4, 
+      justifyContent: 'center',
+      padding: 3,
+      backgroundColor: 'background.default',
+      borderRadius: 2, // Softer border radius
+      boxShadow: 1, // Lighter shadow for a subtle effect
+    }}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{ 
+          textAlign: 'center', 
+          color: 'primary.main', 
+          fontWeight: '600', // Slightly lighter font weight
+          fontSize: '1.8rem', // Slightly larger font size
+          paddingBottom: 3,
+          paddingTop: 2,
+          letterSpacing: '0.5px', // Slight letter spacing for better readability
+        }}
+      >
+        Start Funding
+      </Typography>
 
-          <Box
-            sx={{
-              maxHeight: 400,
-              overflowY: 'auto',
-              borderRadius: 3,
-              boxShadow: 4,
-              p: 2,
-              backgroundColor: '#1976d2', 
-              transition: 'all 0.4s ease-in-out',
-              '&:hover': {
-                backgroundColor: '#D1E9FB', 
-                boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.15)',
-              },
-            }}
-          >
-            {requests.length > 0 ? (
-              <List sx={{ p: 0 }}>
-                {requests.map((req, index) => (
-                  <Grow in key={req.id} timeout={500 + index * 100}>
-                    <ListItemButton
-                      component={Link}
-                      to={`/donation-requests/${req.id}`}
-                      sx={{
-                        mb: 1.5,
-                        p: 2,
-                        borderRadius: 3,
-                        background: 'linear-gradient(135deg, #f9f9f9, #ffffff)',
-                        boxShadow: 2,
-                        transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out',
-                        '&:hover': {
-                          transform: 'translateX(6px)', 
-                          boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.12)',
-                          backgroundColor: '#F0F0F0',
-                        },
-                      }}
-                    >
-                      <ListItemText
-                        primary={req.description}
-                        secondary={`Amount Needed: ${req.donationType}`}
-                        sx={{
-                          '& .MuiTypography-primary': {
-                            fontSize: '1.3rem',
-                            fontWeight: '700',
-                            color: 'primary.dark',
-                            fontFamily: "'Roboto Slab', serif",
-                          },
-                          '& .MuiTypography-secondary': {
-                            fontSize: '1rem',
-                            color: 'text.secondary',
-                            fontStyle: 'italic',
-                            fontWeight: '500',
-                          },
-                        }}
-                      />
-                    </ListItemButton>
-                  </Grow>
-                ))}
-              </List>
-            ) : (
-              <Typography
-                variant="body1"
+      <Box
+        sx={{
+          maxHeight: '400px',
+          overflowY: 'auto',
+          bgcolor: 'background.paper',
+          borderRadius: 1.5, // Softer border radius
+          boxShadow: 1, // Lighter shadow
+          padding: 2,
+          border: '1px solid #eee', // Lighter border color
+        }}
+      >
+        <List>
+          {requests.map((req) => (
+            <ListItemButton
+              key={req.id}
+              component={Link}
+              to={`/donation-requests/${req.id}`}
+              sx={{
+                borderBottom: '1px solid #eee', // Lighter border color
+                padding: 2,
+                borderRadius: 1, // Softer border radius
+                mb: 1,
+                '&:hover': {
+                  backgroundColor: 'action.hover', // Subtle hover effect
+                  transform: 'translateX(4px)', // Slight horizontal movement on hover
+                  transition: 'all 0.2s ease-in-out',
+                },
+              }}
+            >
+              <ListItemText
+                primary={req.description}
+                secondary={`Amount Needed: ${req.donationType}`}
                 sx={{
-                  textAlign: 'center',
-                  color: 'text.secondary',
-                  fontStyle: 'italic',
-                  fontSize: '1.1rem',
-                  fontFamily: "'Poppins', sans-serif",
+                  color: 'text.primary',
+                  '& .MuiTypography-primary': {
+                    fontSize: '1.1rem', // Slightly smaller font size
+                    fontWeight: '600', // Medium font weight
+                  },
+                  '& .MuiTypography-secondary': {
+                    fontSize: '0.95rem', // Slightly smaller font size
+                    fontWeight: '500',
+                    color: 'text.secondary',
+                  },
                 }}
-              >
-                No donation requests available.
-              </Typography>
-            )}
-          </Box>
-        </Paper>
-      </Grow>
+              />
+            </ListItemButton>
+          ))}
+        </List>
+      </Box>
     </Container>
   );
 };

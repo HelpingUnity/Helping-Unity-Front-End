@@ -1,7 +1,7 @@
-// src/components/Register.jsx
 import React, { useState, useContext } from 'react';
 import { Container, Paper, Typography, TextField, Button, Box, Alert, FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mui/material';
 import { AuthContext } from '../AuthContext/AuthContext';
+
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +14,6 @@ const Register = () => {
   });
   
   const { register: registerUser, loading, error } = useContext(AuthContext);
-
 
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value});
@@ -29,17 +28,27 @@ const Register = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Paper elevation={3} sx={{ p: 4, mt: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Typography component="h1" variant="h5">Register</Typography>
-        {error && <Alert severity="error" sx={{ width: '100%', mt: 2 }}>{error}</Alert>}
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, width: '100%' }}>
-          <TextField margin="normal" required fullWidth name="username" label="Username" value={formData.username} onChange={handleChange} />
-          <TextField margin="normal" required fullWidth name="password" label="Password" type="password" value={formData.password} onChange={handleChange} />
-          <TextField margin="normal" required fullWidth name="fullName" label="Full Name" value={formData.fullName} onChange={handleChange} />
-          <TextField margin="normal" required fullWidth name="email" label="Email" type="email" value={formData.email} onChange={handleChange} />
-          <TextField margin="normal" required fullWidth name="phone" label="Phone" value={formData.phone} onChange={handleChange} />
-          <FormControl fullWidth margin="normal">
+    <Container component="main" maxWidth="lg" sx={{ display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center' }}>
+      <Paper elevation={7} sx={{ display: 'flex', width: '100%', maxWidth: 1200, padding: 0, alignItems: 'center' , borderRadius: 3,marginTop:-19 }}>
+        {/* Left Section with Logo & Text */}
+        <Box sx={{ width: '40%', backgroundColor: '#f5f5f5', padding: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' ,height:550,borderRadius: 3}}>
+          <img src="src/assets/image.png" alt="Helping Unity" style={{ width: '100px', marginBottom: 16, borderRadius: 50 }} />
+          <Typography variant="h6">Join Us!</Typography>
+          <Typography variant="h4" sx={{ fontWeight: 'bold', mt: 1, textAlign: 'center' }}>
+            Create Your Helping Unity Account
+          </Typography>
+        </Box>
+
+        {/* Right Section with Form */}
+        <Box component="form" onSubmit={handleSubmit} sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, padding: 4 }}>
+          <Typography variant="h5" fontWeight="bold">Create an Account</Typography>
+          {error && <Alert severity="error" sx={{ width: '100%' }}>{error}</Alert>}
+          <TextField required fullWidth name="fullName" label="Full Name" value={formData.fullName} onChange={handleChange} />
+          <TextField required fullWidth name="email" label="Email Address" type="email" value={formData.email} onChange={handleChange} />
+          <TextField required fullWidth name="phone" label="Phone Number" value={formData.phone} onChange={handleChange} />
+          <TextField required fullWidth name="username" label="Username" value={formData.username} onChange={handleChange} />
+          <TextField required fullWidth name="password" label="Password" type="password" value={formData.password} onChange={handleChange} />
+          <FormControl fullWidth>
             <InputLabel>Role</InputLabel>
             <Select name="role" value={formData.role} onChange={handleChange} label="Role">
               <MenuItem value="DONOR">Donor</MenuItem>
@@ -47,9 +56,12 @@ const Register = () => {
               <MenuItem value="TRUSTEE">Trustee</MenuItem>
             </Select>
           </FormControl>
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} disabled={loading}>
-            {loading ? <CircularProgress size={24} /> : 'Register'}
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 2 }} disabled={loading}>
+            {loading ? <CircularProgress size={24} /> : 'Sign up'}
           </Button>
+          <Typography variant="body2" sx={{ mt: 2 }}>
+            Already have an account? <a href="/login" style={{ fontWeight: 'bold', textDecoration: 'none' }}>Sign in</a>
+          </Typography>
         </Box>
       </Paper>
     </Container>
