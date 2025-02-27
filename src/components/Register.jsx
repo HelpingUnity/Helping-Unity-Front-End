@@ -28,10 +28,10 @@ const Register = () => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" sx={{ display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center' }}>
+    <Container component="main" maxWidth="lg" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom: 15 }}>
       <Paper elevation={7} sx={{ display: 'flex', width: '100%', maxWidth: 1200, padding: 0, alignItems: 'center' , borderRadius: 3,marginTop:-19 }}>
         {/* Left Section with Logo & Text */}
-        <Box sx={{ width: '40%', backgroundColor: '#f5f5f5', padding: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' ,height:550,borderRadius: 3}}>
+        <Box sx={{ width: '40%', backgroundColor: '#f5f5f5', padding: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRadius: 3 ,height: 650}}>  
           <img src="src/assets/image.png" alt="Helping Unity" style={{ width: '100px', marginBottom: 16, borderRadius: 50 }} />
           <Typography variant="h6">Join Us!</Typography>
           <Typography variant="h4" sx={{ fontWeight: 'bold', mt: 1, textAlign: 'center' }}>
@@ -40,7 +40,7 @@ const Register = () => {
         </Box>
 
         {/* Right Section with Form */}
-        <Box component="form" onSubmit={handleSubmit} sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, padding: 4 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2.5, padding: 4 }}>
           <Typography variant="h5" fontWeight="bold">Create an Account</Typography>
           {error && <Alert severity="error" sx={{ width: '100%' }}>{error}</Alert>}
           <TextField required fullWidth name="fullName" label="Full Name" value={formData.fullName} onChange={handleChange} />
