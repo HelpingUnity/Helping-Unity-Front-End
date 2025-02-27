@@ -91,11 +91,11 @@ const DonationRequestList = () => {
               width: '8px',
             },
             '&::-webkit-scrollbar-track': {
-              background: 'rgba(31, 31, 31, 0.21)0',
+              background: 'rgba(31, 31, 31, 0.27)0',
               borderRadius: '10px',
             },
             '&::-webkit-scrollbar-thumb': {
-              background: 'rgb(117, 117, 117)',
+              background: 'rgb(99, 99, 99)',
               borderRadius: '10px',
             },
             '&::-webkit-scrollbar-thumb:hover': {
