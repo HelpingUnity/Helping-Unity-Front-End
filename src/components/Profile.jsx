@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, Paper, Typography, CircularProgress, Alert } from '@mui/material';
+import { Container, Paper, Typography, CircularProgress, Alert, Box, Avatar } from '@mui/material';
 import { AuthContext } from '../AuthContext/AuthContext';
+import PersonIcon from '@mui/icons-material/Person';
+import shadows from '@mui/material/styles/shadows';
 
 const Profile = () => {
-  const { token } = useContext(AuthContext); // token may be an object or string
+  const { token } = useContext(AuthContext);
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -39,18 +41,13 @@ const Profile = () => {
           }
         });
 
-        console.log("Response status:", response.status);
-        const contentType = response.headers.get("content-type");
-        console.log('Content-Type:', contentType);
-
         if (!response.ok) {
-            const text = await response.text();
-            console.error("Error response:", text);
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
+          const text = await response.text();
+          console.error("Error response:", text);
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
         const data = await response.json();
-        console.log("User details:", data);
         setUserDetails(data);
       } catch (err) {
         console.error("Error fetching user details:", err);
@@ -72,15 +69,26 @@ const Profile = () => {
   if (error) return <Alert severity="error">{error}</Alert>;
 
   return (
-    <Container maxWidth="sm">
-      <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
-        <Typography variant="h4" gutterBottom>User Profile</Typography>
+    <Container maxWidth="sm" sx={{ mt: 3, p: 3 }}>
+      <Paper elevation={8} sx={{ p: 4, mt: 4, textAlign: 'center',borderRadius: 5,}}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2, }}>
+          <Avatar sx={{ bgcolor: 'primary.main', width: 56, height: 56 }}>
+            <PersonIcon fontSize="large" />
+          </Avatar>
+        </Box>
+        <Typography variant="h4" gutterBottom> User Profile</Typography>
         {userDetails && (
-          <>
-            <Typography variant="body1">ID: {userDetails.id}</Typography>
-            <Typography variant="body1">Username: {userDetails.username}</Typography>
-            <Typography variant="body1">Role: {userDetails.role}</Typography>
-          </>
+          <Box sx={{ textAlign: 'left', mt: 2, }}>
+            <Typography variant="body1" sx={{ mb: 1 }}>
+              <strong>ID:</strong> {userDetails.id}
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 1 }}>
+              <strong>Username:</strong> {userDetails.username}
+            </Typography>
+            <Typography variant="body1">
+              <strong>Role:</strong> {userDetails.role}
+            </Typography>
+          </Box>
         )}
       </Paper>
     </Container>
