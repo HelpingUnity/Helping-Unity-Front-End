@@ -4,6 +4,7 @@ import { AuthContext } from '../AuthContext/AuthContext';
 import PersonIcon from '@mui/icons-material/Person';
 import shadows from '@mui/material/styles/shadows';
 
+
 const Profile = () => {
   const { token } = useContext(AuthContext);
   const [userDetails, setUserDetails] = useState(null);
