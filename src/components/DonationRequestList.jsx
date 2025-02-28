@@ -34,7 +34,7 @@ const DonationRequestList = () => {
 
   if (loading)
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 5}}>
         <CircularProgress size={60} thickness={4} color="secondary" />
       </Box>
     );
@@ -48,8 +48,8 @@ const DonationRequestList = () => {
           borderRadius: 4,
           textAlign: 'center',
           backdropFilter: 'blur(10px)',
-          backgroundColor: 'rgba(255, 255, 255, 0.85)',
-          boxShadow: '0px 6px 25px rgba(0, 0, 0, 0.12)',
+          backgroundColor: 'rgba(25, 118, 210, 0.21)',
+          boxShadow: '0px 6px 25px rgba(0, 0, 0, 0.2)',
           transition: 'all 0.4s ease-in-out',
         }}
       >
