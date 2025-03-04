@@ -9,6 +9,7 @@ import {
   ListItemButton,
   Box,
   Paper,
+  Chip
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -58,14 +59,35 @@ const DonationRequestList = () => {
           gutterBottom
           sx={{
             fontWeight: 'bold',
-            color: 'primary.main',
+            backgroundImage: `linear-gradient(40deg, #19335A, #4675C0)`,
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            fontFamily: "Poppins, sans-serif",
             mb: 3,
             letterSpacing: '1px',
             textTransform: 'uppercase',
           }}
         >
-          Start Funding
+          Let's Build a Better
+          
+          <Typography
+          variant="h4"
+          gutterBottom
+          sx={{
+            fontWeight: 'bold',
+            mb: 3,
+            fontFamily: "Poppins, sans-serif",
+            letterSpacing: '1px',
+            textTransform: 'uppercase',
+          }}
+        >
+           Tommorow Together
         </Typography>
+
+        </Typography>
+
+
 
         <Typography
           variant="h5"
@@ -76,6 +98,7 @@ const DonationRequestList = () => {
             mb: 1,
             letterSpacing: '1px',
             textTransform: 'sentence-case',
+            
           }}
         >
           Funding List
@@ -101,6 +124,7 @@ const DonationRequestList = () => {
             '&::-webkit-scrollbar-thumb:hover': {
               background: 'rgba(25, 118, 210, 0.73)',
             },
+            
           }}
         >
 
@@ -128,18 +152,20 @@ const DonationRequestList = () => {
                     '&:hover .MuiTypography-root': {
                       color: 'white !important', // Ensures text turns white on hover
                     },
+                    fontFamily: "Poppins, sans-serif",
                   }}
                 >
                   <ListItemText
                     primary={req.description}
-                    secondary={`Amount Needed: ${req.donationType}`}
+                    secondary={`Donation Type: ${req.donationType}`}
+                    
                     sx={{
                       '& .MuiTypography-primary': {
                         fontSize: '1.3rem',
                         fontWeight: '700',
                         color: 'primary.dark',
-                        fontFamily: "'Roboto Slab', serif",
                         transition: 'color 0.3s ease-in-out',
+                        fontFamily: "Poppins, sans-serif",
                       },
                       '& .MuiTypography-secondary': {
                         fontSize: '1rem',
@@ -147,11 +173,16 @@ const DonationRequestList = () => {
                         fontStyle: 'italic',
                         fontWeight: '500',
                         transition: 'color 0.3s ease-in-out',
+                        fontFamily: "Poppins, sans-serif",
                       },
+                      
                     }}
+                    
                   />
-                </ListItemButton>
 
+                  <Chip label={`Trustee: ${req.trusteeComment}`} color="success" variant="outlined" sx={{fontFamily: "Poppins, sans-serif",}} />
+                </ListItemButton>
+        
               ))}
             </List>
           ) : (

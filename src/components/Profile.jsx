@@ -81,9 +81,6 @@ const Profile = () => {
         {userDetails && (
           <Box sx={{ textAlign: 'left', mt: 2, }}>
             <Typography variant="body1" sx={{ mb: 1 }}>
-              <strong>ID:</strong> {userDetails.id}
-            </Typography>
-            <Typography variant="body1" sx={{ mb: 1 }}>
               <strong>Username:</strong> {userDetails.username}
             </Typography>
             <Typography variant="body1">

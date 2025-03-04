@@ -9,10 +9,21 @@ import {
   CircularProgress,
   Box,
   Paper,
+  Chip,
+  Fab
 } from "@mui/material";
+import NavigationIcon from '@mui/icons-material/Favorite';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { AuthContext } from "../AuthContext/AuthContext";
 import CommentSection from "../components/CommentSection";
 import DonationPayment from "./DonationPayment";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Link,
+} from "react-router-dom";
 
 const DonationRequestDetail = () => {
   const { id } = useParams();
@@ -75,7 +86,7 @@ const DonationRequestDetail = () => {
     );
 
   return (
-    <Container sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
+    <Container sx={{ mt: 4, display: "flex", justifyContent: "center",  }}>
       <Paper
         elevation={6}
         sx={{
@@ -84,11 +95,32 @@ const DonationRequestDetail = () => {
           width: "100%",
           borderRadius: 3,
           backgroundColor: "#ffffff",
+          border: 1,
+          borderColor: "blue",
+          
         }}
       >
+        <Chip label={request.donationType} color="info" sx={{fontFamily: "Poppins, sans-serif", fontSize: '1.35rem'}} />
+        <Typography
+          variant="body1"
+          sx={{
+            mt: 2,
+            textAlign: "center",
+            fontSize: "0.82rem",
+            color: "black",
+
+            justifyContent: 'center',
+            alignContent: 'center',
+            fontFamily: "Poppins, sans-serif",
+          }}
+        >
+           {new Date(request.commentDate).toLocaleString()}
+
+        </Typography>
+        
         <Typography
           variant="h6"
-          sx={{ fontWeight: 600, textAlign: "center", color: "#00000" }}
+          sx={{ fontWeight: 200, textAlign: "center", color: "#00000", fontFamily: "Poppins, sans-serif", padding: 5, fontSize: '1.4rem'}}
         >
           {request.description}
         </Typography>
@@ -97,58 +129,109 @@ const DonationRequestDetail = () => {
           sx={{
             mt: 2,
             textAlign: "center",
-            fontSize: "1.6rem",
-            color: "#6a1b9a",
-            fontWeight: 1,
+            fontSize: "1.0rem",
+            color: "#ffffff",
+            fontWeight: 0,
+            fontFamily: "Poppins, sans-serif",
+            width:260,
+            height:70,
+            
+            borderRadius: 4.5 ,
+            borderColor: '#324A6e',
+             background: 'linear-gradient(to right bottom, #ADD8e6, #324A6e)',
+            alignContent: 'center',
           }}
         >
           Amount Needed: <strong>${request.amountNeeded}</strong>
         </Typography>
+
+
         <Typography
           variant="body1"
           sx={{
             mt: 2,
             textAlign: "center",
-            fontSize: "1.1rem",
-            color: "#aa0426",
-            fontWeight: "bold",
+            fontSize: "1.0rem",
+            color: "#ffffff",
+            width:250,
+            height:70,
+            
+            borderRadius: 4.5 ,
+            borderColor: '#324A6e',
+            background: 'linear-gradient(to right bottom, #DDDDDA, #94B0B7)' ,
+            justifyContent: 'center',
+            alignContent: 'center',
+            fontFamily: "Poppins, sans-serif",
+            marginTop: -9,
+            marginLeft: 35
+          }}
+        >
+          Amount Received: <strong>${request.amountReceived}</strong>
+
+        </Typography>
+
+        <Typography
+          variant="body1"
+          sx={{
+            mt: 2,
+            textAlign: "center",
+            fontSize: "1.0rem",
+            color: "#ffffff",
+            width:200,
+            height:70,
+            borderRadius: 4.5 ,
+            background: 'linear-gradient(to right bottom, #DE5B6D, #E9765B)' ,
+            justifyContent: 'center',
+            alignContent: 'center',
+            fontFamily: "Poppins, sans-serif",
+            marginTop: -9,
+            marginLeft: 68.8
           }}
         >
           Status: <strong>{request.status}</strong>
         </Typography>
 
+
         {user && String(request.recipient?.id) === String(user.id) && (
           <Box
-            sx={{ display: "flex", justifyContent: "center", mt: 3, gap: 2 }}
+            sx={{ display: "flex", justifyContent: "center", mt: 3, gap: 2, padding: 2.5 }}
           >
             <Button
               variant="contained"
               sx={{
-                borderRadius: 2,
-                backgroundColor: "#ffb300",
-                "&:hover": { backgroundColor: "#ffa000" },
+                borderRadius: 2.5,
+                background: 'linear-gradient(to right bottom, #ADD8e6, #DCEAF7)' ,
+                "&:hover": { background: 'linear-gradient(to right bottom,  #DCEAF7, #ADD8e6)' },
                 padding: "10px 20px",
-                color: "#000000", // Fixed color code to #000000 for black
+                boxShadow: 0,
+                color: "#000000", 
+                fontFamily: "Poppins, sans-serif",
               }}
               onClick={() => navigate(`/donation-requests/edit/${id}`)}
             >
+              <EditIcon sx={{ mr: 1 }}/>
               Edit
             </Button>
 
             <Button
               variant="contained"
               sx={{
-                borderRadius: 2,
+                borderRadius: 2.5,
                 backgroundColor: "#d32f2f",
                 "&:hover": { backgroundColor: "#c62828" },
                 padding: "10px 20px",
+                boxShadow: 0,
+                fontFamily: "Poppins, sans-serif",
               }}
               onClick={handleDelete}
             >
+              <DeleteIcon sx={{ mr: 1 }}/>
               Delete
             </Button>
           </Box>
         )}
+
+
 
 <Typography
   variant="h6"
@@ -158,13 +241,14 @@ const DonationRequestDetail = () => {
     fontSize: '1.3rem',
     color: '#f57c00',
     fontWeight: 'bold',
-    textDecoration: 'underline', // Corrected to 'underline'
+    textDecoration: 'underline', 
   }}
 >
-  Donate Now
+
 </Typography>
 
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 2,mb:2 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 2,mb:2, fontFamily: "Poppins, sans-serif", }}>
+
           <DonationPayment
             donationRequestId={request.id}
             amountNeeded={request.amountNeeded}
@@ -175,6 +259,10 @@ const DonationRequestDetail = () => {
         <Box sx={{ mt: 4 }}>
           <CommentSection id={id} />
         </Box>
+
+
+
+
       </Paper>
     </Container>
   );

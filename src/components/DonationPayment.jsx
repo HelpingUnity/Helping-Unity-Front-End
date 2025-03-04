@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Box, Typography, TextField, Alert } from '@mui/material';
 import axiosInstance from '../api/axiosInstance';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 const DonationPayment = ({ donationRequestId, amountNeeded }) => {
   const [amount, setAmount] = useState('');
@@ -38,8 +39,9 @@ const DonationPayment = ({ donationRequestId, amountNeeded }) => {
 
   return (
     <Box sx={{ padding: 4, borderRadius: 2, boxShadow: 2 }}>
+
       <Typography variant="h6" sx={{ marginBottom: 2 }}>
-        Make a Donation
+              Make a Donation
       </Typography>
 
       {amountNeeded && (
@@ -48,12 +50,22 @@ const DonationPayment = ({ donationRequestId, amountNeeded }) => {
         </Typography>
       )}
 
+
+      <TextField label="Owner Name" sx={{ width: '60%',  marginBottom: 2}}></TextField>
+      <TextField label="CVV" sx={{ width: '35%',  marginBottom: 2, marginLeft: 2}}></TextField>
+      <TextField label="Card Number" sx={{ width: '70%',  marginBottom: 2}}></TextField>
+      <TextField type='date' sx={{ width: '25%',  marginBottom: 2, marginLeft: 2}}></TextField>
+
+
+
+
+
       <TextField
         type="number"
         label="Amount ($)"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
-        sx={{ width: '100%', marginBottom: 2 }}
+        sx={{ width: '97%', marginBottom: 2 }}
         inputProps={{ min: 0, step: "0.01" }}
       />
 
@@ -69,6 +81,7 @@ const DonationPayment = ({ donationRequestId, amountNeeded }) => {
         </Alert>
       )}
 
+
       <Button
         variant="contained"
         color="primary"
@@ -76,6 +89,7 @@ const DonationPayment = ({ donationRequestId, amountNeeded }) => {
         disabled={loading}
         sx={{ width: '100%', padding: '12px' }}
       >
+                <AttachMoneyIcon sx={{ mr: 1 }} />
         {loading ? 'Processing...' : 'Donate Now'}
       </Button>
     </Box>

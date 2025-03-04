@@ -92,7 +92,7 @@ const CommentSection = ({ id }) => {
 
       {/* Display the comment for everyone */}
       {donationRequest && donationRequest.trusteeComment ? (
-        <Box sx={{ p: 2, border: '1px solid #ccc', borderRadius: 1, mb: 2 }}>
+        <Box sx={{ p: 2, borderRadius: 3, mb: 2, background: 'linear-gradient(to right bottom, #ADD8e6, #DCEAF7)' }}>
           <Typography variant="body1">{donationRequest.trusteeComment}</Typography>
           {donationRequest.commentDate && (
             <Typography variant="caption">

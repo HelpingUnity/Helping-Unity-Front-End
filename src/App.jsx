@@ -5,6 +5,7 @@ import Register from "./components/Register.jsx";
 import DonationRequestList from "./components/DonationRequestList";
 import DonationRequestDetail from "./components/DonationRequestDetail";
 import DonationRequestForm from "./components/DonationRequestForm";
+
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 import { AuthProvider } from "./AuthContext/AuthContext";
@@ -16,7 +17,7 @@ import {
   Link,
 } from "react-router-dom";
 import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
-import DonationPayment from "./components/Donation";
+import DonationPayment from "./components/DonationPayment";
 import Profile from "./components/Profile.jsx";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             sx={{ display: "flex", gap: 2, borderRadius: 50, marginTop: 8 }}
           >
             <Toolbar>
+              <Button component={Link} to="/donation-requests" color="#ffffff">
               <Typography
                 variant="h6"
                 component="div"
@@ -44,6 +46,7 @@ function App() {
               >
                 Helping Unity
               </Typography>
+              </Button>
               <Box
                 sx={{ gap: 1, borderRadius: 25, flexGrow: 2, paddingLeft: 30 }}
               >
@@ -100,6 +103,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/donation-requests/:id/payments" element={<DonationPayment/>}></Route>
             <Route path="*" element={<Navigate to="/login" />} />
             <Route
               path="/donation-requests"
