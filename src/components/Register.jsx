@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Paper, Typography, TextField, Button, Box, Alert, FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mui/material';
 import { AuthContext } from '../AuthContext/AuthContext';
 
@@ -13,6 +14,7 @@ const Register = () => {
     role: 'DONOR'
   });
   
+  const navigate = useNavigate();
   const { register: registerUser, loading, error } = useContext(AuthContext);
 
   const handleChange = (e) => {
@@ -23,7 +25,7 @@ const Register = () => {
     e.preventDefault();
     const success = await registerUser(formData);
     if (success) {
-      alert('Registration successful! Please login.');
+      navigate('/login'); // Redirect to login page on successful registration
     }
   };
 
