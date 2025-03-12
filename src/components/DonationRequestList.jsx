@@ -180,7 +180,7 @@ const DonationRequestList = () => {
                     
                   />
 
-                  <Chip label={`Trustee: ${req.trusteeComment}`} color="success" variant="outlined" sx={{fontFamily: "Poppins, sans-serif",}} />
+                  <Chip label={`Trustee: ${req.trusteeComment?req.trusteeComment:"No Comments Yet"}`} color="success" variant="outlined" sx={{fontFamily: "Poppins, sans-serif",}} />
                 </ListItemButton>
         
               ))}
