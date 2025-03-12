@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Container, Paper, Typography, TextField, Button, Box, Alert, FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mui/material';
 import { AuthContext } from '../AuthContext/AuthContext';
 
@@ -14,7 +13,6 @@ const Register = () => {
     role: 'DONOR'
   });
   
-  const navigate = useNavigate();
   const { register: registerUser, loading, error } = useContext(AuthContext);
 
   const handleChange = (e) => {
@@ -25,13 +23,13 @@ const Register = () => {
     e.preventDefault();
     const success = await registerUser(formData);
     if (success) {
-      navigate('/login'); // Redirect to login page on successful registration
+      alert('Registration successful! Please login.');
     }
   };
 
   return (
-    <Container component="main" maxWidth="lg" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom: 15 }}>
-      <Paper elevation={7} sx={{ display: 'flex', width: '100%', maxWidth: 1200, padding: 0, alignItems: 'center' , borderRadius: 3,marginTop:-19 }}>
+    <Container component="main" maxWidth="lg" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 24, marginBottom: 15 }}>
+      <Paper elevation={0} sx={{ display: 'flex', width: '100%', maxWidth: 1200, padding: 0, alignItems: 'center' , borderRadius: 3,marginTop:-19,  }}>
         {/* Left Section with Logo & Text */}
         <Box sx={{ width: '40%', backgroundColor: '#f5f5f5', padding: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRadius: 3 ,height: 650}}>  
           <img src="src/assets/image.png" alt="Helping Unity" style={{ width: '100px', marginBottom: 16, borderRadius: 50 }} />

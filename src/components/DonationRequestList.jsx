@@ -41,7 +41,7 @@ const DonationRequestList = () => {
     );
 
   return (
-    <Container maxWidth="md" sx={{ mt: 5, p: 3, fontFamily: "'Poppins', sans-serif" }}>
+    <Container maxWidth="lg" sx={{ mt: 5, p: 3, fontFamily: "'Poppins', sans-serif" , marginLeft:-35, marginRight: 36.5}}>
       <Paper
         elevation={7}
         sx={{
@@ -52,6 +52,7 @@ const DonationRequestList = () => {
           backgroundColor: 'rgba(25, 118, 210, 0.21)',
           boxShadow: '0px 6px 25px rgba(0, 0, 0, 0.2)',
           transition: 'all 0.4s ease-in-out',
+          width:"200%"
         }}
       >
         <Typography
@@ -72,11 +73,16 @@ const DonationRequestList = () => {
           Let's Build a Better
           
           <Typography
-          variant="h4"
+          
           gutterBottom
           sx={{
             fontWeight: 'bold',
             mb: 3,
+            fontSize: 34,
+            backgroundImage: `linear-gradient(40deg, #19335A, #4675C0)`,
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
             fontFamily: "Poppins, sans-serif",
             letterSpacing: '1px',
             textTransform: 'uppercase',
@@ -136,7 +142,7 @@ const DonationRequestList = () => {
                   key={req.id}
                   component={Link}
                   to={`/donation-requests/${req.id}`}
-                  TouchRippleProps={{ rippleColor: '#ff5722' }}
+                  TouchRippleProps={{ ripplecolor: '#ff5722' }}
                   sx={{
                     mb: 2,
                     p: 2,
@@ -156,7 +162,7 @@ const DonationRequestList = () => {
                   }}
                 >
                   <ListItemText
-                    primary={req.description}
+                    primary={req.title}
                     secondary={`Donation Type: ${req.donationType}`}
                     
                     sx={{

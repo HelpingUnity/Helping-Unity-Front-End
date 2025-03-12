@@ -27,9 +27,19 @@ function App() {
     <>
       <AuthProvider>
         <Router>
+          {/* Navigation bar */}
           <AppBar
-            position="static"
-            sx={{ display: "flex", gap: 2, borderRadius: 50, marginTop: 8 }}
+            position="fixed"
+            sx={{
+              top: 16, // adjust this to set distance from top
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "90%", // or any fixed width if needed
+              display: "flex",
+              gap: 2,
+              borderRadius: "50px", // ensure the value is a valid CSS string
+              // Remove marginTop since position fixed doesn't account for it normally
+            }}
           >
             <Toolbar>
               <Button component={Link} to="/donation-requests" color="#ffffff">
@@ -42,6 +52,8 @@ function App() {
                   fontWeight: 800,
                   fontSize: 25,
                   paddingLeft: 2,
+                  color: "#ffffff",
+                  
                 }}
               >
                 Helping Unity

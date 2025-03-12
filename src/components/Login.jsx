@@ -35,8 +35,8 @@ const Login = () => {
   };
 
   return (
-    <Container maxWidth="md" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '8%', marginBottom: '10%' }}>
-      <Paper elevation={7} sx={{ display: 'flex', width: '100%', borderRadius: 3, overflow: 'hidden' ,  }}>
+    <Container maxWidth="md" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '9%', marginBottom: '10%' }}>
+      <Paper elevation={0} sx={{ display: 'flex', width: '100%', borderRadius: 3, overflow: 'hidden' , background: 'linear-gradient(to right bottom,rgb(212, 244, 254),rgb(240, 246, 253))' }}>
 
         {/* Left Section - Welcome Message */}
         <Box sx={{position: 'relative' , width: '40%', backgroundColor: '#f5f5f5', padding: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', }}>
@@ -63,7 +63,7 @@ const Login = () => {
               margin="normal"
               required
               fullWidth
-              placeholder="Email Address"
+              placeholder="Email Address or Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               sx={{ bgcolor: '#f5f5f5', borderRadius: 2 }}

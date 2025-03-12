@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, Paper, Typography, CircularProgress, Alert, Box, Avatar } from '@mui/material';
+import { Container, Paper, Typography, CircularProgress, Alert, Box, Avatar, Button } from '@mui/material';
 import { AuthContext } from '../AuthContext/AuthContext';
 import PersonIcon from '@mui/icons-material/Person';
 import shadows from '@mui/material/styles/shadows';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 
 const Profile = () => {
@@ -70,24 +71,42 @@ const Profile = () => {
   if (error) return <Alert severity="error">{error}</Alert>;
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 3, p: 3 }}>
-      <Paper elevation={8} sx={{ p: 4, mt: 4, textAlign: 'center',borderRadius: 5,}}>
+    <Container maxWidth="sm" sx={{ mt: 3, p: 3, marginLeft:-50, marginRight:27.5 }}>
+      <Paper elevation={0} sx={{ p: 4, mt: 4, textAlign: 'center',borderRadius: 5, width:"900%", background: 'linear-gradient(to right bottom,rgb(212, 244, 254),rgb(240, 246, 253))'}}>
         <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2, }}>
           <Avatar sx={{ bgcolor: 'primary.main', width: 56, height: 56 }}>
             <PersonIcon fontSize="large" />
           </Avatar>
         </Box>
-        <Typography variant="h4" gutterBottom> User Profile</Typography>
+        <Typography variant="h4" gutterBottom> {userDetails.username}</Typography>
         {userDetails && (
           <Box sx={{ textAlign: 'left', mt: 2, }}>
-            <Typography variant="body1" sx={{ mb: 1 }}>
+            <Typography variant="body1" sx={{ mb: 1, fontFamily: "Poppins, sans-serif" }}>
               <strong>Username:</strong> {userDetails.username}
             </Typography>
-            <Typography variant="body1">
+            <Typography variant="body1" sx={{ mb: 1, fontFamily: "Poppins, sans-serif" }}>
               <strong>Role:</strong> {userDetails.role}
+            </Typography>
+            <Typography variant="body1"  sx={{ mb: 1, fontFamily: "Poppins, sans-serif" }}>
+              <strong>Email:</strong> {userDetails.email}
+            </Typography>
+            <Typography variant="body1" sx={{ fontFamily: "Poppins, sans-serif" }}>
+              <strong>Full Name:</strong> {userDetails.fullName}
             </Typography>
           </Box>
         )}
+
+        { /* Log out*/}
+        <a href='/login' sx={{ background: "#1976d2" }}> 
+        <LogoutOutlinedIcon sx={{ mr: 3, 
+          mt: 3, 
+          marginRight:1, 
+          color:"#ffffff", 
+          background:'#1976d2', 
+          padding: 1.5,
+          borderRadius: 15,
+           }} /> 
+        </a>
       </Paper>
     </Container>
   );

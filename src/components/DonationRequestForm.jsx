@@ -2,13 +2,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Container, TextField, Button, Typography, MenuItem, CircularProgress } from '@mui/material';
 import axiosInstance from '../api/axiosInstance';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
  // You might define donation type options here
 
 const DonationRequestForm = () => {
   const { id } = useParams(); // If id exists, then it is edit mode
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    title: '',
     description: '',
     donationType: 'MONETARY',
     amountNeeded: '',
@@ -22,6 +23,8 @@ const DonationRequestForm = () => {
       axiosInstance.get(`/donation-requests/${id}`)
         .then(response => {
           setFormData({
+            // Added title
+            title: response.data.title,
             description: response.data.description,
             donationType: response.data.donationType,
             amountNeeded: response.data.amountNeeded,
@@ -59,14 +62,15 @@ const DonationRequestForm = () => {
   return (
     <Container
     sx={{
-      mt: 7,
+      mt: 9,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       backgroundColor: 'background.default',
       borderRadius: 2,
-      boxShadow: 3,
+      boxShadow: 2,
       padding: 3,
+      
     }}
   >
     <Typography
@@ -78,14 +82,31 @@ const DonationRequestForm = () => {
         fontSize: '1.8rem',
         textAlign: 'center',
         paddingBottom: 2,
+        fontFamily: "Poppins, sans-serif",
       }}
     >
       {id ? 'Edit Donation Request' : 'Create Donation Request'}
     </Typography>
     <form
       onSubmit={handleSubmit}
-      sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}
+      sx={{ width: '100%', display: 'flex', flexDirection: 'column',  }}
     >
+      <TextField
+        label="Title"
+        name="title"
+        value={formData.title}
+        onChange={handleChange}
+        fullWidth
+        required
+        margin="normal"
+        sx={{
+          marginBottom: 2,
+          '& .MuiInputBase-root': {
+            borderRadius: 1,
+            border: '1px solid #ddd',
+          },
+        }}
+      />
       <TextField
         label="Description"
         name="description"
@@ -157,6 +178,16 @@ const DonationRequestForm = () => {
         }}
       >
         {id ? 'Update' : 'Create'}
+      </Button>
+      <Button
+      component={Link} to={`/donation-requests/${id}`}
+      sx={{
+        mt: 3,
+        padding: '12px 24px',
+        fontSize: '1rem',
+        borderRadius: 2,
+      }}> Cancel
+
       </Button>
     </form>
   </Container>

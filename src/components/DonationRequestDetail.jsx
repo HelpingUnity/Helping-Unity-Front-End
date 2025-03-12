@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import NavigationIcon from '@mui/icons-material/Favorite';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { AuthContext } from "../AuthContext/AuthContext";
@@ -86,9 +87,9 @@ const DonationRequestDetail = () => {
     );
 
   return (
-    <Container sx={{ mt: 4, display: "flex", justifyContent: "center",  }}>
+    <Container sx={{ mt: 4, display: "flex", justifyContent: "center", p:5 }}>
       <Paper
-        elevation={6}
+        elevation={0}
         sx={{
           padding: 4,
           maxWidth: 800,
@@ -96,11 +97,35 @@ const DonationRequestDetail = () => {
           borderRadius: 3,
           backgroundColor: "#ffffff",
           border: 1,
-          borderColor: "blue",
+          borderColor: "#1976d2",
           
         }}
       >
-        <Chip label={request.donationType} color="info" sx={{fontFamily: "Poppins, sans-serif", fontSize: '1.35rem'}} />
+        <Button component={Link} to="/donation-requests">
+          <ArrowBackIcon sx={{ mr: 1, mt: -3, marginRight:100, color:"#1976d2" }} /> 
+        </Button>
+
+
+        <Typography
+          variant="body1"
+          sx={{
+            mt: 2,
+            textAlign: "center",
+            fontSize: "1.82rem",
+            color: "black",
+
+            justifyContent: 'center',
+            alignContent: 'center',
+            fontFamily: "Poppins, sans-serif",
+          }}
+        >
+                  
+           {request.title}
+
+        </Typography>
+
+        <Chip label={request.donationType} color="info" sx={{fontFamily: "Poppins, sans-serif", fontSize: '0.8rem'}} />
+
         <Typography
           variant="body1"
           sx={{
@@ -114,7 +139,7 @@ const DonationRequestDetail = () => {
             fontFamily: "Poppins, sans-serif",
           }}
         >
-           {new Date(request.commentDate).toLocaleString()}
+           {new Date(request.createdAt).toLocaleString()}
 
         </Typography>
         
@@ -233,19 +258,19 @@ const DonationRequestDetail = () => {
 
 
 
-<Typography
-  variant="h6"
-  sx={{
-    mt: 4,
-    textAlign: 'center',
-    fontSize: '1.3rem',
-    color: '#f57c00',
-    fontWeight: 'bold',
-    textDecoration: 'underline', 
-  }}
->
+        <Typography
+          variant="h6"
+          sx={{
+            mt: 4,
+            textAlign: 'center',
+            fontSize: '1.3rem',
+            color: '#f57c00',
+            fontWeight: 'bold',
+            textDecoration: 'underline', 
+          }}
+        >
 
-</Typography>
+        </Typography>
 
         <Box sx={{ display: "flex", justifyContent: "center", mt: 2,mb:2, fontFamily: "Poppins, sans-serif", }}>
 
