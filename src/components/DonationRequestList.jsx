@@ -107,7 +107,7 @@ const DonationRequestList = () => {
             
           }}
         >
-          Funding List
+          FUNDING LIST
         </Typography>
         <Box
           sx={{
