@@ -2,15 +2,15 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Container, Paper, Typography, CircularProgress, Alert, Box, Avatar, Button } from '@mui/material';
 import { AuthContext } from '../AuthContext/AuthContext';
 import PersonIcon from '@mui/icons-material/Person';
+import shadows from '@mui/material/styles/shadows';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
+
 const Profile = () => {
-  const { token, setToken } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [deleting, setDeleting] = useState(false);
-  const [deleteError, setDeleteError] = useState(null);
 
   const extractTokenString = (storedToken) => {
     let tokenString = '';
@@ -67,42 +67,12 @@ const Profile = () => {
     }
   }, [token]);
 
-  const handleDeleteAccount = async () => {
-    setDeleting(true);
-    setDeleteError(null);
-  
-    try {
-      const response = await fetch("http://localhost:8080/api/user/deactivate", {
-        method: "DELETE",
-        headers: {
-          "Authorization": `Bearer ${token}`  // Ensure the token is correctly passed here
-        }
-      });
-  
-      if (response.ok) {
-        setDeleteError(null);
-        setToken(null); // Clear the token from context
-        localStorage.removeItem("token"); // Remove token from localStorage
-        window.location.href = "/login"; // Redirect to login page
-      } else {
-        const text = await response.text();
-        setDeleteError(`Error: ${text}`);
-      }
-    } catch (error) {
-      console.log("Fetch error:", error);
-      setDeleteError(`Error: ${error.message}`);
-    } finally {
-      setDeleting(false);
-    }
-  };
-  
-
   if (loading) return <CircularProgress />;
   if (error) return <Alert severity="error">{error}</Alert>;
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 3, p: 3, marginLeft: -50, marginRight: 27.5 }}>
-      <Paper elevation={0} sx={{ p: 4, mt: 4, textAlign: 'center', borderRadius: 5, width: "900%", background: 'linear-gradient(to right bottom,rgb(212, 244, 254),rgb(240, 246, 253))' }}>
+    <Container maxWidth="sm" sx={{ mt: 3, p: 3, marginLeft:-50, marginRight:27.5 }}>
+      <Paper elevation={0} sx={{ p: 4, mt: 4, textAlign: 'center',borderRadius: 5, width:"900%", background: 'linear-gradient(to right bottom,rgb(212, 244, 254),rgb(240, 246, 253))'}}>
         <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2, }}>
           <Avatar sx={{ bgcolor: 'primary.main', width: 56, height: 56 }}>
             <PersonIcon fontSize="large" />
@@ -117,7 +87,7 @@ const Profile = () => {
             <Typography variant="body1" sx={{ mb: 1, fontFamily: "Poppins, sans-serif" }}>
               <strong>Role:</strong> {userDetails.role}
             </Typography>
-            <Typography variant="body1" sx={{ mb: 1, fontFamily: "Poppins, sans-serif" }}>
+            <Typography variant="body1"  sx={{ mb: 1, fontFamily: "Poppins, sans-serif" }}>
               <strong>Email:</strong> {userDetails.email}
             </Typography>
             <Typography variant="body1" sx={{ fontFamily: "Poppins, sans-serif" }}>
@@ -126,44 +96,17 @@ const Profile = () => {
           </Box>
         )}
 
-        {/* Log out */}
-        <Box sx={{ mt: 3 }}>
-          <a href='/login' style={{ background: "#1976d2" }}>
-            <LogoutOutlinedIcon sx={{
-              mr: 3,
-              mt: 3,
-              marginRight: 1,
-              color: "#ffffff",
-              background: '#1976d2',
-              padding: 1.5,
-              borderRadius: 15,
-            }} />
-          </a>
-        </Box>
-
-        {/* Delete Account */}
-        <Box sx={{ mt: 3 }}>
-          <Button
-            variant="contained"
-            color="error"
-            onClick={handleDeleteAccount}
-            disabled={deleting}
-            sx={{
-              padding: '10px 20px',
-              borderRadius: 15,
-              fontSize: '16px',
-              marginTop: '20px',
-            }}
-          >
-            {deleting ? "Deleting..." : "Delete Account"}
-          </Button>
-        </Box>
-
-        {deleteError && (
-          <Alert severity="error" sx={{ mt: 2 }}>
-            {deleteError}
-          </Alert>
-        )}
+        { /* Log out*/}
+        <a href='/login' sx={{ background: "#1976d2" }}> 
+        <LogoutOutlinedIcon sx={{ mr: 3, 
+          mt: 3, 
+          marginRight:1, 
+          color:"#ffffff", 
+          background:'#1976d2', 
+          padding: 1.5,
+          borderRadius: 15,
+           }} /> 
+        </a>
       </Paper>
     </Container>
   );
