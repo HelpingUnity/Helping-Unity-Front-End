@@ -60,7 +60,7 @@ function App() {
               </Typography>
               </Button>
               <Box
-                sx={{ gap: 1, borderRadius: 25, flexGrow: 2, paddingLeft: 30 }}
+                sx={{ gap: 1, borderRadius: 25, flexGrow: 2, paddingLeft: '40%' }}
               >
                 <Button
                   color="inherit"
