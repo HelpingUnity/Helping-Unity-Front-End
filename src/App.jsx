@@ -31,26 +31,26 @@ function App() {
           <AppBar
             position="fixed"
             sx={{
-              top: 16, // adjust this to set distance from top
+              top: 16,
               left: "50%",
               transform: "translateX(-50%)",
-              width: "90%", // or any fixed width if needed
+              width: "90%", 
               display: "flex",
               gap: 2,
-              borderRadius: "50px", // ensure the value is a valid CSS string
-              // Remove marginTop since position fixed doesn't account for it normally
+              borderRadius: "50px", 
+              
             }}
           >
             <Toolbar>
               <Button component={Link} to="/donation-requests" color="#ffffff">
                 <img
-                  src="src/assets/image.png" 
+                  src="src/assets/logo.png" 
                   alt="Logo"
                   style={{
                     height: 45,
                     width: "auto",
-                    marginRight: 5,
-                    borderRadius: 50,
+                    marginRight: 4,
+                    
                   }}
                 />
                 <Typography
@@ -104,24 +104,24 @@ function App() {
                   sx={{
                     alignItems: "center",
                     padding: 1,
-                    textTransform: "none", // Optional: Disable uppercase
+                    textTransform: "none", 
                   }}
                 >
                   <img
                     src="src/assets/user1.png"
                     alt="User Icon"
                     style={{
-                      width: "24px", // Adjust icon size
+                      width: "24px", 
                       height: "24px",
                     }}
                   />
-                  {/* Optional: Add text next to the icon */}
+                  
                 </Button>
               </Box>
             </Toolbar>
           </AppBar>
 
-          {/* Add your navigation bar here if needed */}
+          
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -137,7 +137,7 @@ function App() {
             />
             <Route path="/profile" element={<Profile />} />
 
-            {/* Only RECIPIENT should be allowed to create or edit donation requests */}
+            
             <Route
               path="/donation-requests/new"
               element={
