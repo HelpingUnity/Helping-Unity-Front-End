@@ -59,7 +59,7 @@ const DonationRequestForm = () => {
     });
   };
 
-  // Only show form to recipients
+  // Only show the form to recipients
   if (user?.role !== 'RECIPIENT') {
     return null;
   }

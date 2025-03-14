@@ -94,8 +94,6 @@ const DonationRequestList = () => {
 
         </Typography>
 
-
-
         <Typography
           variant="h5"
           gutterBottom
@@ -134,8 +132,7 @@ const DonationRequestList = () => {
             
           }}
         >
-
-
+          {/*Mapping through the requests array to display each request*/}
           {requests.length > 0 ? (
             <List sx={{ p: 0 }}>
               {requests.map((req) => (

@@ -18,7 +18,7 @@ const DonationRequestForm = () => {
 
   useEffect(() => {
     if (id) {
-      // Fetch the existing request for editing
+      // Fetch the existing request for editing. This is an axios GET request
       setLoading(true);
       axiosInstance.get(`/donation-requests/${id}`)
         .then(response => {
@@ -177,6 +177,8 @@ const DonationRequestForm = () => {
           },
         }}
       >
+        {/*Changed button text. If id exists, then it is an update
+          operation. Otherwise, it is a create operation */}
         {id ? 'Update' : 'Create'}
       </Button>
       <Button

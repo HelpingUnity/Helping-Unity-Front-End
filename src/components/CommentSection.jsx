@@ -38,6 +38,7 @@ const CommentSection = ({ id }) => {
 
   // Save (add or update) the trustee comment
   const handleSave = async () => {
+    // Only TRUSTEE can add or update comments
     if (!user || user.role !== 'TRUSTEE') return;
     setLoading(true);
     setError(null);
@@ -108,7 +109,7 @@ const CommentSection = ({ id }) => {
       {user && (user.role === 'TRUSTEE' || user.role === "ADMIN") && (
         <Box sx={{ mt: 2 }}>
           {donationRequest && donationRequest.trusteeComment ? (
-            // If a comment exists, allow editing only if the logged trustee is the creator
+            // If a comment exists, allow editing only if the logged in trustee is the creator
             (String(user.id) === String(donationRequest.trusteeId) || user.role === "ADMIN") ? (
               <>
                 <TextField

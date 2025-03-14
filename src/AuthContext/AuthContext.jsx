@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // The user login function
   const login = async (username, password) => {
     setLoading(true);
     setError(null);
@@ -19,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
       // Decode the token manually
       const decodedToken = parseJwt(accessToken);
-      const id = decodedToken?.sub; // adjust if your id is stored under a different claim
+      const id = decodedToken?.sub; 
       const role = decodedToken?.role || (decodedToken?.authorities && decodedToken.authorities[0]) || undefined;
       console.log("Extracted Role:", role);
 
@@ -31,6 +32,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // The user register function
   const register = async (userData) => {
     setLoading(true);
     setError(null);
@@ -45,6 +47,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // The logout function
   const logout = () => {
     localStorage.removeItem('token');
     setUser(null);
@@ -58,6 +61,7 @@ export const AuthProvider = ({ children }) => {
 };
 
 // Include the helper function in the same file
+//JWT parser function
 function parseJwt(token) {
   try {
     const base64Url = token.split('.')[1];

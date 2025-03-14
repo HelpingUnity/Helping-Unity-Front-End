@@ -22,7 +22,7 @@ const DonationPayment = ({ donationRequestId, amountNeeded }) => {
       const paymentData = {
         amount: Math.round(amount * 100), // Convert to cents
         currency: 'usd',
-        paymentMethodId: 'tok_visa', // Replace with actual Stripe token
+        paymentMethodId: 'tok_visa', // Replace with actual Stripe token when integrating
         description: `Donation for request #${donationRequestId}`,
         donationRequestId: donationRequestId
       };
@@ -55,9 +55,6 @@ const DonationPayment = ({ donationRequestId, amountNeeded }) => {
       <TextField label="CVV" sx={{ width: '35%',  marginBottom: 2, marginLeft: 2}}></TextField>
       <TextField label="Card Number" sx={{ width: '70%',  marginBottom: 2}}></TextField>
       <TextField type='date' sx={{ width: '25%',  marginBottom: 2, marginLeft: 2}}></TextField>
-
-
-
 
 
       <TextField

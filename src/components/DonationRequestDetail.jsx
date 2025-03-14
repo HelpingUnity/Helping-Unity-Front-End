@@ -12,8 +12,6 @@ import {
   Chip,
   Fab
 } from "@mui/material";
-import NavigationIcon from '@mui/icons-material/Favorite';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -55,6 +53,7 @@ const DonationRequestDetail = () => {
       });
   }, [id]);
 
+  // Delete the donation request
   const handleDelete = () => {
     axiosInstance
       .delete(`/donation-requests/${id}`)
@@ -216,7 +215,7 @@ const DonationRequestDetail = () => {
           Status: <strong>{request.status}</strong>
         </Typography>
 
-
+        {/* Display the edit and delete buttons if the user is the recipient or an admin */}
         {user && ((String(request.recipient?.id) === String(user.id)) || (user.role === "ADMIN")) && (
           <Box
             sx={{ display: "flex", justifyContent: "center", mt: 3, gap: 2, padding: 2.5 }}
@@ -256,8 +255,6 @@ const DonationRequestDetail = () => {
           </Box>
         )}
 
-
-
         <Typography
           variant="h6"
           sx={{
@@ -273,21 +270,15 @@ const DonationRequestDetail = () => {
         </Typography>
 
         <Box sx={{ display: "flex", justifyContent: "center", mt: 2,mb:2, fontFamily: "Poppins, sans-serif", }}>
-
           <DonationPayment
             donationRequestId={request.id}
             amountNeeded={request.amountNeeded}
             onPaymentComplete={handlePaymentComplete}
           />
         </Box>
-
         <Box sx={{ mt: 4 }}>
           <CommentSection id={id} />
         </Box>
-
-
-
-
       </Paper>
     </Container>
   );
