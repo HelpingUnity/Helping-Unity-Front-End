@@ -105,11 +105,11 @@ const CommentSection = ({ id }) => {
       )}
 
       {/* Editing controls: Only show if the user is a TRUSTEE */}
-      {user && user.role === 'TRUSTEE' && (
+      {user && (user.role === 'TRUSTEE' || user.role === "ADMIN") && (
         <Box sx={{ mt: 2 }}>
           {donationRequest && donationRequest.trusteeComment ? (
             // If a comment exists, allow editing only if the logged trustee is the creator
-            String(user.id) === String(donationRequest.trusteeId) ? (
+            (String(user.id) === String(donationRequest.trusteeId) || user.role === "ADMIN") ? (
               <>
                 <TextField
                   fullWidth

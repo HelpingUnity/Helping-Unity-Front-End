@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import Login from "./components/Login.jsx";
 import Register from "./components/Register.jsx";
 import DonationRequestList from "./components/DonationRequestList";
@@ -30,45 +31,37 @@ function App() {
           <AppBar
             position="fixed"
             sx={{
-              top: 16, 
+              top: 16, // adjust this to set distance from top
               left: "50%",
               transform: "translateX(-50%)",
-              width: "90%", 
+              width: "90%", // or any fixed width if needed
               display: "flex",
               gap: 2,
-              borderRadius: "50px", 
+              borderRadius: "50px", // ensure the value is a valid CSS string
+              // Remove marginTop since position fixed doesn't account for it normally
             }}
           >
             <Toolbar>
               <Button component={Link} to="/donation-requests" color="#ffffff">
-                <img
-                  src="src/assets/image.png"
-                  alt="Logo"
-                  style={{
-                    width: "45px", 
-                    height: "45px",
-                    marginRight: "12px",
-                    marginLeft: "12px",
-                    borderRadius: "50px", 
-                  }}
-                />
-                <Typography
-                  variant="h6"
-                  component="div"
-                  sx={{
-                    flexGrow: 0,
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: 800,
-                    fontSize: 25,
-                    color: "#ffffff",
-                  }}
-                >
-                  Helping Unity
-                </Typography>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  flexGrow: 0,
+                  fontFamily: "Poppins, sans-serif",
+                  fontWeight: 800,
+                  fontSize: 25,
+                  paddingLeft: 2,
+                  color: "#ffffff",
+                  
+                }}
+              >
+                Helping Unity
+              </Typography>
               </Button>
-
-              {/* Navigation buttons */}
-              <Box sx={{ gap: 1, borderRadius: 25, flexGrow: 2, paddingLeft: '40%' }}>
+              <Box
+                sx={{ gap: 1, borderRadius: 25, flexGrow: 2, paddingLeft: 30 }}
+              >
                 <Button
                   color="inherit"
                   component={Link}
@@ -101,36 +94,44 @@ function App() {
                   sx={{
                     alignItems: "center",
                     padding: 1,
-                    textTransform: "none", 
+                    textTransform: "none", // Optional: Disable uppercase
                   }}
                 >
                   <img
                     src="src/assets/user1.png"
                     alt="User Icon"
                     style={{
-                      width: "24px", 
+                      width: "24px", // Adjust icon size
                       height: "24px",
                     }}
                   />
-
+                  {/* Optional: Add text next to the icon */}
                 </Button>
               </Box>
             </Toolbar>
           </AppBar>
 
-
+          {/* Add your navigation bar here if needed */}
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/donation-requests/:id/payments" element={<DonationPayment />} />
+            <Route path="/donation-requests/:id/payments" element={<DonationPayment/>}></Route>
             <Route path="*" element={<Navigate to="/login" />} />
-            <Route path="/donation-requests" element={<DonationRequestList />} />
-            <Route path="/donation-requests/:id" element={<DonationRequestDetail />} />
+            <Route
+              path="/donation-requests"
+              element={<DonationRequestList />}
+            />
+            <Route
+              path="/donation-requests/:id"
+              element={<DonationRequestDetail />}
+            />
             <Route path="/profile" element={<Profile />} />
 
+            {/* Only RECIPIENT should be allowed to create or edit donation requests */}
             <Route
               path="/donation-requests/new"
               element={
+                // <ProtectedRoute allowedRoles={['RECIPIENT']}>
                 <ProtectedRoute>
                   <DonationRequestForm />
                 </ProtectedRoute>
@@ -140,8 +141,10 @@ function App() {
             <Route
               path="/donation-requests/edit/:id"
               element={
+                // <ProtectedRoute allowedRoles={['DONOR']}>
                 <ProtectedRoute>
                   <DonationRequestForm />
+                  {/* <DonationRequestForm /> */}
                 </ProtectedRoute>
               }
             />
@@ -150,6 +153,8 @@ function App() {
           </Routes>
         </Router>
       </AuthProvider>
+
+      {/* <Home /> */}
     </>
   );
 }

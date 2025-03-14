@@ -131,7 +131,7 @@ const DonationRequestDetail = () => {
           sx={{
             mt: 2,
             textAlign: "center",
-            fontSize: "0.82rem",
+            fontSize: "0.72rem",
             color: "black",
 
             justifyContent: 'center',
@@ -145,7 +145,7 @@ const DonationRequestDetail = () => {
         
         <Typography
           variant="h6"
-          sx={{ fontWeight: 200, textAlign: "center", color: "#00000", fontFamily: "Poppins, sans-serif", padding: 5, fontSize: '1.4rem'}}
+          sx={{ fontWeight: 200, textAlign: "center", color: "#00000", fontFamily: "Poppins, sans-serif", padding: 5, fontSize: '1.2rem'}}
         >
           {request.description}
         </Typography>
@@ -217,7 +217,7 @@ const DonationRequestDetail = () => {
         </Typography>
 
 
-        {user && String(request.recipient?.id) === String(user.id) && (
+        {user && ((String(request.recipient?.id) === String(user.id)) || (user.role === "ADMIN")) && (
           <Box
             sx={{ display: "flex", justifyContent: "center", mt: 3, gap: 2, padding: 2.5 }}
           >

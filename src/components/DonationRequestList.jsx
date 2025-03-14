@@ -41,7 +41,7 @@ const DonationRequestList = () => {
     );
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 5, p: 3, fontFamily: "'Poppins', sans-serif" , marginLeft:-35, marginRight: 36.5}}>
+    <Container maxWidth="lg" sx={{ mt: 5, p: 3, fontFamily: "'Poppins', sans-serif" , marginLeft:-35, marginRight: 16.5}}>
       <Paper
         elevation={7}
         sx={{
@@ -107,7 +107,7 @@ const DonationRequestList = () => {
             
           }}
         >
-          FUNDING LIST
+          Funding List
         </Typography>
         <Box
           sx={{
