@@ -43,24 +43,34 @@ function App() {
           >
             <Toolbar>
               <Button component={Link} to="/donation-requests" color="#ffffff">
-              <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                  flexGrow: 0,
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 800,
-                  fontSize: 25,
-                  paddingLeft: 2,
-                  color: "#ffffff",
-                  
-                }}
-              >
-                Helping Unity
-              </Typography>
+                <img
+                  src="src/assets/image.png" 
+                  alt="Logo"
+                  style={{
+                    height: 45,
+                    width: "auto",
+                    marginRight: 5,
+                    borderRadius: 50,
+                  }}
+                />
+                <Typography
+                  variant="h6"
+                  component="div"
+                  sx={{
+                    flexGrow: 0,
+                    fontFamily: "Poppins, sans-serif",
+                    fontWeight: 800,
+                    fontSize: 25,
+                    paddingLeft: 2,
+                    color: "#ffffff",
+
+                  }}
+                >
+                  Helping Unity
+                </Typography>
               </Button>
               <Box
-                sx={{ gap: 1, borderRadius: 25, flexGrow: 2, paddingLeft: 30 }}
+                sx={{ gap: 1, borderRadius: 25, flexGrow: 2, paddingLeft: 60 }}
               >
                 <Button
                   color="inherit"
@@ -115,7 +125,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/donation-requests/:id/payments" element={<DonationPayment/>}></Route>
+            <Route path="/donation-requests/:id/payments" element={<DonationPayment />}></Route>
             <Route path="*" element={<Navigate to="/login" />} />
             <Route
               path="/donation-requests"
