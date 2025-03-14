@@ -5,7 +5,12 @@
     <img src="https://img.shields.io/badge/MySQL-black?style=for-the-badge&logoColor=white&logo=mysql&color=f29111" alt="nativewind" />
   </div>
 
-  
+  <div align="center">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot" width="50" height="50" style="margin: 10px;" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="ReactJS" width="50" height="50" style="margin: 10px;" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" alt="MySQL" width="50" height="50" style="margin: 10px;" />
+</div>
+
 # Helping Unity Frontend
 
 ## Setup
