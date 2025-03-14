@@ -20,7 +20,7 @@ const FundingForm = () => {
       setLoading(true);
       axiosInstance.get(`/donation-requests/${id}`)
         .then(response => {
-          // If your API wraps the response in a "body" property, adjust accordingly:
+          
           const data = response.data.body ? response.data.body : response.data;
           setFormData({
             description: data.description,

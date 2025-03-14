@@ -6,7 +6,7 @@ import { AuthContext } from '../AuthContext/AuthContext';
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user } = useContext(AuthContext);
   
-  // Check if user is logged in and if their role is allowed.
+  // Check if user is logged in.
   if (!user) {
     return <Navigate to="/login" />;
   }

@@ -37,8 +37,7 @@ function App() {
               width: "90%", 
               display: "flex",
               gap: 2,
-              borderRadius: "50px", 
-              
+              borderRadius: "50px",
             }}
           >
             <Toolbar>
@@ -115,13 +114,11 @@ function App() {
                       height: "24px",
                     }}
                   />
-                  
                 </Button>
               </Box>
             </Toolbar>
           </AppBar>
 
-          
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -141,7 +138,6 @@ function App() {
             <Route
               path="/donation-requests/new"
               element={
-                // <ProtectedRoute allowedRoles={['RECIPIENT']}>
                 <ProtectedRoute>
                   <DonationRequestForm />
                 </ProtectedRoute>
@@ -154,7 +150,6 @@ function App() {
                 // <ProtectedRoute allowedRoles={['DONOR']}>
                 <ProtectedRoute>
                   <DonationRequestForm />
-                  {/* <DonationRequestForm /> */}
                 </ProtectedRoute>
               }
             />
@@ -163,8 +158,6 @@ function App() {
           </Routes>
         </Router>
       </AuthProvider>
-
-      {/* <Home /> */}
     </>
   );
 }

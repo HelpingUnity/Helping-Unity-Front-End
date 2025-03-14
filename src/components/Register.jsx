@@ -39,7 +39,7 @@ const Register = () => {
           </Typography>
         </Box>
 
-        {/* Right Section with Form */}
+        {/* Right Section with registration form */}
         <Box component="form" onSubmit={handleSubmit} sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2.5, padding: 4 }}>
           <Typography variant="h5" fontWeight="bold">Create an Account</Typography>
           {error && <Alert severity="error" sx={{ width: '100%' }}>{error}</Alert>}

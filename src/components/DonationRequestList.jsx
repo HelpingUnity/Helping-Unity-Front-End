@@ -19,6 +19,7 @@ const DonationRequestList = () => {
 
   useEffect(() => {
     setLoading(true);
+    //Getting all donation requests using axios
     axiosInstance
       .get('/donation-requests')
       .then((response) => {

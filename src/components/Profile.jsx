@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Container, Paper, Typography, CircularProgress, Alert, Box, Avatar, Button } from '@mui/material';
 import { AuthContext } from '../AuthContext/AuthContext';
 import PersonIcon from '@mui/icons-material/Person';
-import shadows from '@mui/material/styles/shadows';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 
@@ -12,6 +11,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Extract token string from stored token
   const extractTokenString = (storedToken) => {
     let tokenString = '';
     if (!storedToken) return tokenString;
@@ -34,6 +34,7 @@ const Profile = () => {
     const tokenString = extractTokenString(tokenData);
     console.log("Using token:", tokenString);
 
+    //Fetch the user details
     const fetchUserDetails = async () => {
       try {
         const response = await fetch("http://localhost:8080/api/user/me", {

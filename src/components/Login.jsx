@@ -23,6 +23,7 @@ const Login = () => {
   const { login, loading, error, user } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  //If user already logged in redirect to donation requests page
   useEffect(() => {
     if (user) {
       navigate('/donation-requests');
