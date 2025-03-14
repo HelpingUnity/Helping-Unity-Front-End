@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Container, Paper, Typography, TextField, Button, Box, Alert, FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mui/material';
 import { AuthContext } from '../AuthContext/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const Register = () => {
@@ -14,6 +15,7 @@ const Register = () => {
   });
   
   const { register: registerUser, loading, error } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value});
@@ -23,7 +25,7 @@ const Register = () => {
     e.preventDefault();
     const success = await registerUser(formData);
     if (success) {
-      alert('Registration successful! Please login.');
+      navigate('/login');
     }
   };
 
