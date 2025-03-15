@@ -1,57 +1,59 @@
+
 import React, { useState, useEffect, useContext } from "react";
 import {
-  Container,
-  Paper,
-  Typography,
-  TextField,
-  CircularProgress,
-  Alert,
-  Box,
-  Avatar,
-  Button,
-  Divider,
-  IconButton,
-  createTheme,
-  ThemeProvider,
+  Container, 
+  Paper, 
+  Typography, 
+  TextField, 
+  CircularProgress, 
+  Alert, 
+  Box, 
+  Avatar, 
+  Button, 
+  Divider, 
+  IconButton, 
+  createTheme, 
+  ThemeProvider, 
 } from "@mui/material";
-import { AuthContext } from "../AuthContext/AuthContext";
-import { useNavigate } from "react-router-dom";
-import PersonIcon from "@mui/icons-material/Person";
-import SettingsIcon from "@mui/icons-material/Settings";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import LogoutIcon from "@mui/icons-material/Logout";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import EditIcon from "@mui/icons-material/Edit";
-import CloseIcon from "@mui/icons-material/Close";
+import { AuthContext } from "../AuthContext/AuthContext"; 
+import { useNavigate } from "react-router-dom"; 
+import PersonIcon from "@mui/icons-material/Person"; 
+import SettingsIcon from "@mui/icons-material/Settings"; 
+import NotificationsIcon from "@mui/icons-material/Notifications"; 
+import LogoutIcon from "@mui/icons-material/Logout"; 
+import MoreVertIcon from "@mui/icons-material/MoreVert"; 
+import EditIcon from "@mui/icons-material/Edit"; 
+import CloseIcon from "@mui/icons-material/Close"; 
 
 const Profile = () => {
-  const navigate = useNavigate();
-  const { token } = useContext(AuthContext);
+  // Initialize hooks and states
+  const navigate = useNavigate(); // Hook for navigating between pages
+  const { token } = useContext(AuthContext); // Access token from AuthContext
   const [userDetails, setUserDetails] = useState({
-    fullName: "Your Name",
+    fullName: "Your Name", 
     email: "yourname@gmail.com",
     mobile: "",
     location: "USA",
   });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const [loading, setLoading] = useState(true); // State to handle loading state
+  const [error, setError] = useState(null); // State to handle error messages
+  const [anchorEl, setAnchorEl] = useState(null); // State to handle anchor for menu (not used)
+  const open = Boolean(anchorEl); // Boolean to check if the menu is open
 
   // Profile Picture State
   const [profileImage, setProfileImage] = useState(
-    localStorage.getItem("profilePicture") || "/default-profile.png"
+    localStorage.getItem("profilePicture") || "/default-profile.png" // Get saved profile image from localStorage or use default
   );
 
   // Handle profile picture upload
   const handleProfilePictureUpload = (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
+    const file = event.target.files[0]; // Get the uploaded file
+    if (!file) return; // Exit if no file is selected
 
     // Create a local URL for the uploaded file
     const imagePath = URL.createObjectURL(file);
 
-    // Save to localStorage so it persists
+    // Save to localStorage so it persists across sessions
     localStorage.setItem("profilePicture", imagePath);
 
     // Update state to display the new image
@@ -60,39 +62,40 @@ const Profile = () => {
 
   // Fetch User Data
   useEffect(() => {
-    let tokenData = token || localStorage.getItem("token");
+    let tokenData = token || localStorage.getItem("token"); // Get token from context or localStorage
 
     const fetchUserDetails = async () => {
       try {
         const response = await fetch("http://localhost:8080/api/user/me", {
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${tokenData}`,
+            "Content-Type": "application/json", // Set headers for the API request
+            Authorization: `Bearer ${tokenData}`, // Send token for authorization
           },
         });
 
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`); // Handle failed response
 
-        const data = await response.json();
-        setUserDetails(data);
+        const data = await response.json(); // Parse the response JSON
+        setUserDetails(data); // Update user details state
       } catch (err) {
-        setError(err.message);
+        setError(err.message); // Set error state in case of failure
       } finally {
-        setLoading(false);
+        setLoading(false); // Set loading to false once the fetch is complete
       }
     };
 
-    if (tokenData) fetchUserDetails();
+    if (tokenData) fetchUserDetails(); // Fetch user details if token exists
     else {
-      setError("No valid token found. Please log in.");
+      setError("No valid token found. Please log in."); // Error if no valid token
       setLoading(false);
     }
-  }, [token]);
+  }, [token]); // Re-fetch data when token changes
 
-  if (loading) return <CircularProgress />;
-  if (error) return <Alert severity="error">{error}</Alert>;
+  if (loading) return <CircularProgress />; // Display loading spinner while fetching data
+  if (error) return <Alert severity="error">{error}</Alert>; // Display error message if there's an error
 
   return (
+    
     <ThemeProvider theme={createTheme({ palette: { mode: "light" } })}>
       <Container maxWidth="sm" sx={{ mt: 5, display: "flex", justifyContent: "center" }}>
         <Paper
@@ -103,10 +106,10 @@ const Profile = () => {
             textAlign: "center",
             width: "800px",
             position: "relative",
-            backgroundColor: "rgb(206, 226, 245)",
+            backgroundColor: "rgb(206, 226, 245)", 
           }}
         >
-          {/* Close Button */}
+          {/* Close Button to navigate back to home */}
           <IconButton
             sx={{ position: "absolute", top: "10px", right: "10px" }}
             onClick={() => navigate("/")}
@@ -121,9 +124,10 @@ const Profile = () => {
               src={profileImage}
               alt="Profile"
             >
-              {!profileImage && <PersonIcon fontSize="large" />}
+              {!profileImage && <PersonIcon fontSize="large" />} {/* Default icon if no profile image */}
             </Avatar>
 
+            {/* Icon to upload new profile picture */}
             <IconButton
               sx={{
                 position: "absolute",
@@ -141,7 +145,7 @@ const Profile = () => {
             </IconButton>
           </Box>
 
-          {/* User Details */}
+          {/* Display user details */}
           <Typography variant="h6" sx={{ mt: 1 }}>
             {userDetails.fullName}
           </Typography>
@@ -151,7 +155,7 @@ const Profile = () => {
 
           <Divider sx={{ my: 2 }} />
 
-          {/* Editable Fields */}
+          {/* Editable fields for user details */}
           <Box sx={{ textAlign: "left" }}>
             <TextField
               fullWidth
@@ -161,7 +165,6 @@ const Profile = () => {
               onChange={(e) => setUserDetails({ ...userDetails, fullName: e.target.value })}
               sx={{ mb: 2 }}
             />
-
             <TextField
               fullWidth
               label="Email account"
@@ -170,7 +173,6 @@ const Profile = () => {
               onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })}
               sx={{ mb: 2 }}
             />
-
             <TextField
               fullWidth
               label="Mobile number"
@@ -179,7 +181,6 @@ const Profile = () => {
               onChange={(e) => setUserDetails({ ...userDetails, mobile: e.target.value })}
               sx={{ mb: 2 }}
             />
-
             <TextField
               fullWidth
               label="Location"
@@ -195,7 +196,7 @@ const Profile = () => {
             variant="contained"
             color="primary"
             fullWidth
-            sx={{ mt: 3 }}
+            sx={{ mt: 4 }}
             onClick={() => alert("Profile Updated Successfully!")}
           >
             Save Changes
@@ -214,8 +215,8 @@ const Profile = () => {
             <IconButton
               color="error"
               onClick={() => {
-                localStorage.removeItem("token");
-                window.location.href = "/login";
+                localStorage.removeItem("token"); // Remove token from localStorage
+                window.location.href = "/login"; // Redirect to login page
               }}
             >
               <LogoutIcon />
@@ -227,4 +228,5 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+
+export default Profile; 
